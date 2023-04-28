@@ -1,7 +1,6 @@
 .control-box-wrapper {
     background-color: #F8F8F8;
     margin-block-start: 2em;
-    /* width: 80%; */
     width: minmax(60%, 80%);
     margin: 0;
     margin-inline: 1em;

@@ -22,3 +22,33 @@ img {
     display: inline-block;
     padding: .4rem;
 }
+
+@media only screen and (min-width: 1280px) {
+    .my-memes {
+        grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .gallery-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery-container img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .gallery-container:nth-child(even) {
+        grid-column: 1;
+    }
+
+    .gallery-container:nth-child(odd) {
+        grid-column: 2;
+    }
+
+    .search-box {
+        border: none;
+    }
+}

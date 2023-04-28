@@ -5,6 +5,8 @@ let gSavedMemeId = 0
 const KEY = 'my-memesDB'
 
 function showMemes() {
+    document.querySelector('.canvas-container').classList.add('hide')
+    document.querySelector('.control-box-area').classList.add('hide')
     document.querySelector('.gallery-container').classList.add('hide')
     document.querySelector('.my-memes').classList.remove('hide')
     document.querySelector('.templates-title').classList.remove('active')
@@ -22,7 +24,7 @@ function renderMeme() {
     gSavedMemes.map(meme => {
         const memeContent = encodeURIComponent(JSON.stringify(meme.memeContent))
         strHtml += `<div class="meme-container flex column"><a href="#" class="jump-to-top"><img class="meme-num-${meme.id}" src="${meme.data}" data-img="${meme.memeContent.selectedImgId}" onclick="renderMemeFromMyMemes('${memeContent}')"/></a>
-        <button onclick="onRemoveFromMyMemes(${meme.id})">Remove</button></div>`
+        <button class="remove-btn" onclick="onRemoveFromMyMemes(${meme.id})">Remove</button></div>`
     })
     document.querySelector('.my-memes').innerHTML = strHtml
 }
