@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Tzhokim.io</title>
+</head>
+
+<body onload="onInit()">
+    <header class="main-header flex row space-between align-center">
+        <div class="logo">
+            <h3 class="logo-title">Tzhokim.io</h3>
+        </div>
+        <ul class="nav-bar flex gap">
+            <li><a href="#" onclick="showGallery()" class="templates-title">Templates</a></li>
+            <li><a href="#" onclick="showMemes()" class="my-memes-title">My Memes</a></li>
+            <li><a href="#" onclick="showAbout()" class="about-title">About</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <input type="text" placeholder="Search &telrec;" class="search-box">
+        <div class="gallery-container">
+        </div>
+
+        <div class="canvas-container">
+        </div>
+
+        <div class="control-box-area hide flex justify-center">
+        </div>
+
+        <div class="my-memes"></div>
+    </main>
+
+    <script src="js/util.service.js"></script>
+    <script src="js/editor.service.js"></script>
+    <script src="js/imgs.service.js"></script>
+    <script src="js/gallery.controller.js"></script>
+    <script src="js/my-memes.service.js"></script>
+    <script src="js/my-memes.controller.js"></script>
+    <script src="js/editor.controller.js"></script>
+</body>
+
+</html>

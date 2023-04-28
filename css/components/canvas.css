@@ -1,0 +1,22 @@
+#my-canvas {
+    border: 2px solid black;
+}
+
+.canvas-title {
+    margin-block-start: 2em;
+    margin-block-end: 2em;
+}
+
+@media only screen and (max-width: 420px) {
+    canvas {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    canvas {
+        width: 500px;
+        height: 500px;
+    }
+}

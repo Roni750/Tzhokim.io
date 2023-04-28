@@ -1,0 +1,6 @@
+.logo-title {
+    background: #ffb45b;
+    background: linear-gradient(to top, #ffb45b 0%, #FF9520 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

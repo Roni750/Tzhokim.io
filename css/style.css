@@ -1,0 +1,21 @@
+/* SETUP */
+@import 'setup/vars.css';
+
+/* BASICS */
+@import 'basics/base.css';
+@import 'basics/layout.css';
+@import 'basics/helpers.css';
+
+/* COMPONENTS */
+@import 'components/header.css';
+@import 'components/logo.css';
+/* @import 'components/main-content.css'; */
+@import 'components/gallery.css';
+@import 'components/control-box.css';
+@import 'components/buttons.css';
+@import 'components/canvas.css';
+@import 'components/my-memes.css';
+/* @import 'components/screen.css'; */
+
+/* MEDIA QUERIS */
+@import 'basics/hide.css';

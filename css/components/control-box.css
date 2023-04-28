@@ -1,0 +1,127 @@
+.control-box-wrapper {
+    background-color: #F8F8F8;
+    margin-block-start: 2em;
+    /* width: 80%; */
+    width: minmax(60%, 80%);
+    margin: 0;
+    margin-inline: 1em;
+    text-align: center;
+    justify-self: center;
+}
+
+.control-box-title {
+    color: #727272;
+}
+
+.control-box-wrapper {
+    /* width: max-content; */
+    grid-template-columns: 1fr 1fr 1fr .5fr .5fr .5fr;
+    grid-template-rows: 1fr 2rem 1.5rem;
+}
+
+.font-selection {
+    grid-column: 1;
+    grid-row: 1;
+    /* width: 6em; */
+}
+
+.a-upscale {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.a-downscale {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.font-scale {
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: 2;
+}
+
+.align-btns {
+    grid-column: 3;
+    grid-row: 1;
+    grid-template-columns: 2;
+}
+
+.btn-svg:nth-of-type(1) {
+    grid-column: 1;
+}
+
+.btn-svg:nth-of-type(2) {
+    grid-column: 2;
+}
+
+.btn-svg:nth-of-type(3) {
+    grid-column: 3;
+}
+
+.color-selection {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.color-picker-container span {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.fill-color-picker {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+
+.stroke-color-picker {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+
+.arrow-up {
+    grid-column: 5;
+    grid-row: 1;
+}
+
+.arrow-down {
+    grid-column: 6;
+    grid-row: 1;
+}
+
+.toggle-line-btn {
+    grid-row: 3;
+    grid-column: 3 / 5;
+}
+
+.add-line-btn {
+    grid-row: 3;
+    grid-column: 5 /7;
+}
+
+/* These 2 selectors  might be useless */
+/* .color-selection:nth-child(1) {
+    grid-column: 1;
+}
+
+.color-selection:nth-child(2){
+    grid-column: 2;
+} */
+
+.punchline {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+@media only screen and (min-width: 600px) {
+    .control-box-area {
+        /* width: 570px; */
+        width: 100%;
+        margin: 0;
+        text-align: center;
+        justify-self: center;
+    }
+}
