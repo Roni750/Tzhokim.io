@@ -15,7 +15,7 @@
 .control-box-wrapper {
     /* width: max-content; */
     grid-template-columns: 1fr 1fr 1fr .5fr .5fr .5fr;
-    grid-template-rows: 1fr 2rem 1.5rem;
+    grid-template-rows: 1fr 2rem 2rem;
 }
 
 .font-selection {
