@@ -5,18 +5,18 @@ let gSavedMemeId = 0
 const KEY = 'my-memesDB'
 
 function showMemes() {
-    document.querySelector('.canvas-container').classList.add('hide')
-    document.querySelector('.control-box-area').classList.add('hide')
-    document.querySelector('.gallery-container').classList.add('hide')
+    hide('canvas-container')
+    hide('control-box-area')
+    hide('gallery-container')
+    hide('about')
+    hide('actions')
+    removeActiveClass('about-title')
+    removeActiveClass('templates-title')
     document.querySelector('.my-memes').classList.remove('hide')
     document.querySelector('.templates-title').classList.remove('active')
     document.querySelector('.my-memes-title').classList.add('active')
     gSavedMemes = getSavedMemes()
     renderMeme()
-}
-
-function getSavedMemes() {
-    return loadFromStorage(KEY)
 }
 
 function renderMeme() {
@@ -29,15 +29,11 @@ function renderMeme() {
     document.querySelector('.my-memes').innerHTML = strHtml
 }
 
-function onRemoveFromMyMemes(memeId) {
-    removeFromMyMemes(getMemeIdxFromId(memeId))
-}
-
 function renderMemeFromMyMemes(selectedMeme) {
+    document.querySelector('.playground-area').classList.remove('hide')
     const memeContent = JSON.parse(decodeURIComponent(selectedMeme))
-    console.log("gCurrImgId", gCurrImgId)
-    console.log("memeContent", memeContent)
-    
+    gCurrImgId = memeContent.selectedImgId
+    returnImgValues()
     initCanvas()
 
     gElCanvas = document.querySelector('#my-canvas')
@@ -57,6 +53,10 @@ function renderMemeFromMyMemes(selectedMeme) {
     showControlBox()
 }
 
+function onRemoveFromMyMemes(memeId) {
+    removeFromMyMemes(getMemeIdxFromId(memeId))
+}
+
 function saveMemeToStorage(memeDataUrl) {
     const newMeme = {
         id: gSavedMemeId++,
@@ -66,4 +66,8 @@ function saveMemeToStorage(memeDataUrl) {
     newMeme.memeContent.selectedImgId = gCurrImgId
     gSavedMemes.push(newMeme)
     saveToStorage(KEY, gSavedMemes)
+}
+
+function getSavedMemes() {
+    return loadFromStorage(KEY)
 }

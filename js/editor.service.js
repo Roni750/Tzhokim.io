@@ -30,22 +30,30 @@ function _createMeme() {
                 color: 'white',
                 strokeColor: 'black',
                 font: 'Impact',
-                pos: { 
-                    x: 200,
+                pos: {
+                    x: 250,
                     y: 50
-                 }
+                }
             }
         ]
+    }
+}
+
+function setLinesPosByImgId(imgId) {
+    gMeme.lines[0].pos.x = gElCanvas.width / 2
+    gMeme.lines[0].pos.y = gElCanvas.height / 100
+
+    if (gMeme.lines[1]) {
+        gMeme.lines[1].pos.x = gElCanvas.width / 2
+        gMeme.lines[1].pos.y = (gElCanvas.height / 2)
     }
 }
 
 function setLinePos(posDirection) {
     console.log("posDirection", posDirection)
     if (posDirection === '+5') {
-        // console.log(gMeme.lines[gMeme.selectedLineIdx].pos.y)
         gMeme.lines[gMeme.selectedLineIdx].pos.y += 5
     } else if (posDirection === '-5') {
-        // console.log(gMeme.lines[gMeme.selectedLineIdx].pos.y)
         gMeme.lines[gMeme.selectedLineIdx].pos.y -= 5
     }
 }
@@ -85,11 +93,6 @@ function updateText(text) {
     gMeme.lines[lineIdx].txt = text.value || 'Please Update Text'
 }
 
-// function saveMeme() {
-//     gMemes.push(gMeme)
-//     saveToStorage(KEY, gMemes)
-// }
-
 function toggleLine() {
     if (gMeme.selectedLineIdx >= gMeme.lines.length - 1) {
         gMeme.selectedLineIdx = 0
@@ -108,12 +111,16 @@ function addLine() {
         color: 'white',
         strokeColor: 'black',
         font: 'Impact',
-        pos: { 
-            x: 200,
-            y: 350
-         }
+        pos: {
+            x: 250,
+            y: getCanvasHeight()
+        }
     }
     gMeme.lines.push(newLine)
+}
+
+function getCanvasHeight() {
+    return (gElCanvas.height / 8) * 7
 }
 
 function getImgById(imgId) {

@@ -5,9 +5,12 @@
 }
 
 html {
-    /* color: var(--clr1);
-    font-family: lato, serif; */
     width: 100%;
+}
+
+::selection {
+    color: white;
+    background-color: #ffab4a
 }
 
 body {
@@ -20,5 +23,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    background-color: #F8F8F8;
+    background-color: white;
 }

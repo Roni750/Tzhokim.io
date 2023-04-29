@@ -1,11 +1,8 @@
 .control-box-wrapper {
     background-color: #F8F8F8;
-    margin-block-start: 2em;
     width: minmax(60%, 80%);
-    margin: 0;
     margin-inline: 1em;
-    text-align: center;
-    justify-self: center;
+    margin-block-start: 1em;
 }
 
 .control-box-title {
@@ -13,15 +10,13 @@
 }
 
 .control-box-wrapper {
-    /* width: max-content; */
-    grid-template-columns: 1fr 1fr 1fr .5fr .5fr .5fr;
-    grid-template-rows: 1fr 2rem 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr .5fr .5fr;
+    grid-template-rows: 2em 2rem 1.5rem;
 }
 
 .font-selection {
     grid-column: 1;
     grid-row: 1;
-    /* width: 6em; */
 }
 
 .a-upscale {
@@ -61,6 +56,15 @@
 .color-selection {
     grid-column: 4;
     grid-row: 1;
+    display: grid;
+}
+
+.stroke-clr {
+    grid-column: 1;
+}
+
+.fill-clr {
+    grid-column: 2;
 }
 
 .color-picker-container span {
@@ -93,34 +97,41 @@
 
 .toggle-line-btn {
     grid-row: 3;
-    grid-column: 3 / 5;
+    grid-column: 5 /7;
 }
 
 .add-line-btn {
     grid-row: 3;
-    grid-column: 5 /7;
+    grid-column: 4 / 5;
 }
 
-/* These 2 selectors  might be useless */
-/* .color-selection:nth-child(1) {
-    grid-column: 1;
+.share-btn {
+    grid-column: 3 / 4;
+    grid-row: 3;
 }
-
-.color-selection:nth-child(2){
-    grid-column: 2;
-} */
 
 .punchline {
     grid-column: 1 / -1;
     grid-row: 2;
 }
 
+.download-btn>a {
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+}
+
+@media only screen and (max-width: 380px) {
+    .control-box-wrapper {
+        font-size: 10px;
+    }
+}
+
 @media only screen and (min-width: 600px) {
     .control-box-area {
-        /* width: 570px; */
         width: 100%;
         margin: 0;
         text-align: center;
-        justify-self: center;
+        margin-block-start: 1em;
     }
 }

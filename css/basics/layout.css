@@ -2,3 +2,22 @@ main {
     width: 100%;
     text-align: center;
 }
+
+/* @media only screen and (min-width: 970px) {
+    .playground-area {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .canvas-container {
+        grid-column: 1;
+    }
+
+    .control-box-area {
+        grid-column: 2;
+        display: block;
+        height: max-content;
+        align-self: center;
+        background-color: #F8F8F8;
+    }
+} */

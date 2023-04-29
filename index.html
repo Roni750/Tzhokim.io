@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Roboto&display=swap" rel="stylesheet">    
+    <script src="https://kit.fontawesome.com/2a0ed5474d.js" crossorigin="anonymous"></script>
     <title>Tzhokim.io</title>
 </head>
 
@@ -14,7 +18,7 @@
         <div class="logo">
             <h3 class="logo-title">Tzhokim.io</h3>
         </div>
-        <ul class="nav-bar flex gap">
+        <ul class="nav-bar flex">
             <li><a href="#" onclick="showGallery()" class="templates-title">Templates</a></li>
             <li><a href="#" onclick="showMemes()" class="my-memes-title">My Memes</a></li>
             <li><a href="#" onclick="showAbout()" class="about-title">About</a></li>
@@ -22,16 +26,40 @@
     </header>
 
     <main>
-        <input type="text" placeholder="Search &telrec;" class="search-box">
+        <div class="actions">
+            <input type="text" class="search-box" placeholder="Filter by &telrec;" list="meme-templates" id="meme-query"
+                name="meme-query" oninput="onFilterBy(value)">
+            <datalist class="meme-templates" id="meme-templates">
+                <!-- Options rendered from gallery.controller -->
+            </datalist>
+        </div>
+
         <div class="gallery-container">
         </div>
 
-        <div class="canvas-container">
+        <div class="playground-area">
+            <div class="canvas-container">
+            </div>
+
+            <div class="control-box-area hide flex justify-center">
+            </div>
         </div>
 
-        <div class="control-box-area hide flex justify-center">
+        <div class="about hide">
+            <img src="img/myimg.jpg" alt="Avatar" style="width:100%">
+            <div class="text-container">
+                <h3 class="card-title">Roni Yerushalmi</h3>
+                <p>Yo, I'm a student at coding academy's Fullstack Bootcamp course, March 2023<br />
+                    I'm a huge motorcycles & technology enthusiast, anything that concludes these two topics will
+                    probably be on my favorites list pending for read until I get my life back, which means by the end
+                    of the course.</p>
+            </div>
+            <div class="about-footer">
+                <a href="https://www.linkedin.com/in/%E2%80%AAroni-yerushalmi-2184b0227/"><i
+                        class="fa-brands fa-linkedin"></i></a> | <a href="https://github.com/Roni750"><i
+                        class="fa-brands fa-github"></i></a>
+            </div>
         </div>
-
         <div class="my-memes"></div>
     </main>
 

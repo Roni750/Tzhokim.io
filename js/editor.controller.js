@@ -1,14 +1,20 @@
 'use strict'
 
-let gCtx, gElCanvas, gCurrImgId
+let gCtx, gElCanvas, gCurrImgId, gCanvasWidth, gCanvasHeight
 
 function onSelectTemplate(imgId) {
-    document.querySelector('.my-memes').classList.add('hide')
+    hide('my-memes')
+    hide('actions')
+    document.querySelector('.playground-area').classList.remove('hide')
+    document.querySelector('.canvas-container').classList.remove('hide')
+    document.querySelector('.control-box-area').classList.remove('hide')
     gCurrImgId = imgId
+    returnImgValues()
     setSelectedImgId(imgId)
     showControlBox()
     initCanvas()
     renderImg(imgId)
+    setLinesPosByImgId(imgId)
 }
 
 function onFillColorChange(color) {
@@ -45,9 +51,19 @@ function initCanvas() {
     const elCanvasContainer = document.querySelector('.canvas-container')
     elCanvasContainer.classList.remove('hide')
     const strHtml = `<h3 class="canvas-title">Generate a meme</h3>
-    <canvas id="my-canvas" height="400" width="400">
+    <canvas id="my-canvas" height="${gCanvasHeight}" width="500">
     </canvas>`
     elCanvasContainer.innerHTML = strHtml
+}
+
+function returnImgValues() {
+    console.log("gCurrImgId", gCurrImgId)
+    const currImage = getImgById(gCurrImgId)
+    const { width, height } = currImage.size
+    const imageWidth = width
+    const imageHeight = height
+
+    gCanvasHeight = (imageHeight * 500) / imageWidth
 }
 
 function renderImg(imgId) {
@@ -55,7 +71,7 @@ function renderImg(imgId) {
     gCtx = gElCanvas.getContext('2d')
 
     const elImg = new Image()
-    elImg.src = `img/square/${imgId}.jpg`
+    elImg.src = `img/various/${imgId}.jpg`
 
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -66,7 +82,7 @@ function renderImg(imgId) {
 }
 
 function drawText(text, line = 0, x = 200, y = 50) {
-    const lineHeight = 40;
+    const lineHeight = 40
     const lines = text.split('\n')
     gCtx.lineWidth = 2
     gCtx.strokeStyle = gMeme.lines[line].strokeColor
@@ -91,32 +107,60 @@ function downloadImg(elLink) {
 function onSaveMeme() {
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     saveMemeToStorage(imgContent)
-    // saveMeme()
 }
 
 function onAddLine() {
     addLine(gCurrImgId)
     document.querySelector('.punchline').value = ''
-    // ! This line below might be useless.
-    // renderImg(gCurrImgId)
 }
 
 // * Routing pages functions/ DOM manipulation
 
 function showGallery() {
+    if (gCurrImgId) returnImgValues()
+    hide('control-box-area')
+    hide('canvas-container')
+    hide('my-memes')
+    hide('about')
+    removeActiveClass('templates-title')
+    removeActiveClass('about-title')
+    document.querySelector('.search-box').value = ''
+    document.querySelector('.hide').classList.remove('hide')
     document.querySelector('.templates-title').classList.add('active')
     document.querySelector('.my-memes-title').classList.remove('active')
     const elGallery = document.querySelector('.gallery-container')
     elGallery.classList.remove('hide')
 
-    const elBoxArea = document.querySelector('.control-box-area')
-    elBoxArea.classList.add('hide')
-
-    const elCanvas = document.querySelector('.canvas-container')
-    elCanvas.classList.add('hide')
-
-    document.querySelector('.my-memes').classList.add('hide')
     resetMeme()
+    renderGallery()
+}
+
+function addActiveClass(className) {
+    const el = document.querySelector(`.${className}`)
+    el.classList.add('active')
+}
+
+function removeActiveClass(className) {
+    const el = document.querySelector(`.${className}`)
+    el.classList.remove('active')
+}
+
+function hide(className) {
+    const el = document.querySelector(`.${className}`)
+    el.classList.add('hide')
+}
+
+function showAbout() {
+    const elAbout = document.querySelector('.about')
+    elAbout.classList.remove('hide')
+
+    hide('actions')
+    hide('gallery-container')
+    hide('playground-area')
+    hide('my-memes')
+    addActiveClass('about-title')
+    removeActiveClass('templates-title')
+    removeActiveClass('my-memes-title')
 }
 
 function onToggleLine() {
@@ -133,7 +177,6 @@ function onTextAlign(alignValue) {
 function showControlBox() {
     const elBoxArea = document.querySelector('.control-box-area')
     elBoxArea.classList.remove('hide')
-    // <input type="text" placeholder="Punchline goes here" class="punchline" oninput="onUpdateText(this)">
     const strHtml = `
     <div class="control-box-wrapper grid">
         <select class="font-selection" name="font" id="font-selection" onchange="onFontChange(this.value)">
@@ -184,11 +227,53 @@ function showControlBox() {
         <button class="arrow-up" value="-5" onclick="onPosChange(this)">↑</button>
         <button class="arrow-down" value="+5" onclick="onPosChange(this)">↓</button>
         <button onclick="onSaveMeme(this)">Save</button>
-        <button><a href="#" class="btn" onclick="downloadImg(this)" download="my-meme.jpg">Download</a></button>
+        <button class="download-btn"><a href="#" class="btn" onclick="downloadImg(this)" download="my-meme.jpg">Download</a></button>
         <button class="add-line-btn" onclick="onAddLine()">Add Line</button>
-        <button class="toggle-line-btn" onclick="onToggleLine()">Toggle line</button>
+        <button class="toggle-line-btn" onclick="onToggleLine()">Toggle</button>
+        <button class="share-btn" onclick="shareToFacebook()">Share</button>
     </div>`
     elBoxArea.innerHTML = strHtml
-    const elGallery = document.querySelector('.gallery-container')
-    elGallery.classList.add('hide')
+    hide('gallery-container')
+}
+
+function shareToFacebook() {
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg') // Gets the canvas content as an image format
+
+    // A function to be called if request succeeds
+    function onSuccess(uploadedImgUrl) {
+        // Encode the instance of certain characters in the url
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        console.log(encodedUploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+    // Send the image to the server
+    doUploadImg(imgDataUrl, onSuccess)
+}
+
+function doUploadImg(imgDataUrl, onSuccess) {
+    // Pack the image for delivery
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
+
+    // Send a post req with the image to the server
+    const XHR = new XMLHttpRequest()
+    XHR.onreadystatechange = () => {
+        // If the request is not done, we have no business here yet, so return
+        if (XHR.readyState !== XMLHttpRequest.DONE) return
+        // if the response is not ok, show an error
+        if (XHR.status !== 200) return console.error('Error uploading image')
+        const { responseText: url } = XHR
+        // Same as
+        // const url = XHR.responseText
+
+        // If the response is ok, call the onSuccess callback function, 
+        // that will create the link to facebook using the url we got
+        console.log('Got back live url:', url)
+        onSuccess(url)
+    }
+    XHR.onerror = (req, ev) => {
+        console.error('Error connecting to server with request:', req, '\nGot response data:', ev)
+    }
+    XHR.open('POST', '//ca-upload.com/here/upload.php')
+    XHR.send(formData)
 }

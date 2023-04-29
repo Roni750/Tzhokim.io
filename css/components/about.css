@@ -1,0 +1,38 @@
+.about {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 40%;
+    margin: 0 auto;
+    margin-block-start: 2em;
+    font-family: 'merriweather', serif;
+    border-radius: 10px;
+}
+
+.about > img {
+    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.about:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.about-footer {
+    margin-block: 1em;
+    padding: .5em;
+    border-block-start: 1px lightgray solid;
+}
+
+.card-title {
+    margin-block: 1em;
+}
+
+.about-footer > a {
+    color: inherit;
+    text-decoration: none;
+    margin-inline: 1em;
+}
