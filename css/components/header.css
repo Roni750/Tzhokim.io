@@ -34,8 +34,12 @@ li>.active {
     color: var(--clr4);
 }
 
-@media only screen and (max-width: 370px) {
+@media only screen and (max-width: 430px) {
     .main-header {
-        padding-inline: 1rem;
+        padding-inline: .3rem;
+    }
+
+    .nav-bar {
+        align-items: center;
     }
 }
