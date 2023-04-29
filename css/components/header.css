@@ -36,6 +36,6 @@ li>.active {
 
 @media only screen and (max-width: 370px) {
     .main-header {
-        padding-inline: .3rem;
+        padding-inline: 1rem;
     }
 }

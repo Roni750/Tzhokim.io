@@ -10,8 +10,14 @@
 }
 
 .control-box-wrapper {
+<<<<<<< HEAD
     grid-template-columns: 1fr 1fr 1fr 1fr .5fr .5fr;
     grid-template-rows: 2em 2rem 1.5rem;
+=======
+    /* width: max-content; */
+    grid-template-columns: 1fr 1fr 1fr .5fr .5fr .5fr;
+    grid-template-rows: 1fr 2rem 2rem;
+>>>>>>> addda6f10ff26a31bbcf0225b1586a5c6428bfca
 }
 
 .font-selection {
