@@ -5,6 +5,7 @@ let gSavedMemeId = 0
 const KEY = 'my-memesDB'
 
 function showMemes() {
+    if (isMobile()) onToggleMenu(undefined , 'off')
     hide('canvas-container')
     hide('control-box-area')
     hide('gallery-container')

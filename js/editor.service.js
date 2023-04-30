@@ -40,6 +40,7 @@ function _createMeme() {
 }
 
 function setLinesPosByImgId(imgId) {
+    if (!gElCanvas) return
     gMeme.lines[0].pos.x = gElCanvas.width / 2
     gMeme.lines[0].pos.y = gElCanvas.height / 100
 
@@ -50,6 +51,7 @@ function setLinesPosByImgId(imgId) {
 }
 
 function setLinePos(posDirection) {
+    // Not to be confused with the "setLinesPosByImgId" function, this function deals with events from the text editor to vertically set the alignment of the line. 
     console.log("posDirection", posDirection)
     if (posDirection === '+5') {
         gMeme.lines[gMeme.selectedLineIdx].pos.y += 5

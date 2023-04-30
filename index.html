@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Roboto&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Roboto&display=swap"
+        rel="stylesheet">
     <script src="https://kit.fontawesome.com/2a0ed5474d.js" crossorigin="anonymous"></script>
     <title>Tzhokim.io</title>
 </head>
@@ -16,18 +17,21 @@
 <body onload="onInit()">
     <header class="main-header flex row space-between align-center">
         <div class="logo">
-            <h3 class="logo-title">Tzhokim.io</h3>
+            <h3 class="logo-title" onclick="showGallery()">Tzhokim.io</h3>
         </div>
-        <ul class="nav-bar flex">
-            <li><a href="#" onclick="showGallery()" class="templates-title">Templates</a></li>
-            <li><a href="#" onclick="showMemes()" class="my-memes-title">My Memes</a></li>
-            <li><a href="#" onclick="showAbout()" class="about-title">About</a></li>
-        </ul>
+        <nav>
+            <ul class="nav-bar flex">
+                <li><a href="#" onclick="showGallery()" class="templates-title">Templates</a></li>
+                <li><a href="#" onclick="showMemes()" class="my-memes-title">My Memes</a></li>
+                <li><a href="#" onclick="showAbout()" class="about-title">About</a></li>
+            </ul>
+        </nav>
+        <div class="nav-btn" onclick="onToggleMenu(this)">☰</div>
     </header>
 
     <main>
         <div class="actions">
-            <input type="text" class="search-box" placeholder="Filter by &telrec;" list="meme-templates" id="meme-query"
+            <input type="text" class="search-box" placeholder="Search" list="meme-templates" id="meme-query"
                 name="meme-query" oninput="onFilterBy(value)">
             <datalist class="meme-templates" id="meme-templates">
                 <!-- Options rendered from gallery.controller -->
@@ -42,6 +46,65 @@
             </div>
 
             <div class="control-box-area hide flex justify-center">
+                <div class="control-box-wrapper grid">
+                    <select class="font-selection" name="font" id="font-selection" onchange="onFontChange(this.value)">
+                        <option value="impact">Impact</option>
+                        <option value="arial">Arial</option>
+                        <option value="tahoma">Tahoma</option>
+                    </select>
+                    <textarea class="punchline" oninput="onUpdateText(this)" rows="2" cols="50"></textarea>
+                    <!-- <input type="text" placeholder="Punchline goes here" class="punchline" oninput="onUpdateText(this)"> -->
+                    <div class="font-scale grid">
+                        <button class="a-upscale" onclick="onFontSizeChange(this)">A+</button>
+                        <button class="a-downscale" onclick="onFontSizeChange(this)">A-</button>
+                    </div>
+                    <div class="align-btns grid">
+                        <button class="btn-svg" title="right" onclick="onTextAlign(this)">
+                            <svg width="1rem" height="1rem" focusable="false">
+                                <path
+                                    d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2zm0-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z"
+                                    fill-rule="evenodd">
+                                </path>
+                            </svg>
+                        </button>
+                        <button class="btn-svg" title="center" onclick="onTextAlign(this)">
+                            <svg width="1rem" height="1rem" focusable="false">
+                                <path
+                                    d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z"
+                                    fill-rule="evenodd">
+                                </path>
+                            </svg>
+                        </button>
+                        <button class="btn-svg" title="left" onclick="onTextAlign(this)">
+                            <svg width="1rem" height="1rem" focusable="false">
+                                <path
+                                    d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm3 4h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 110-2zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 010-2zm-3-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z"
+                                    fill-rule="evenodd">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="color-selection grid">
+                        <div class="stroke-clr">
+                            <div class="button-replica"><label for="strokeClr">🖌️</label></div>
+                            <input type="color" id="strokeClr" class="stroke-color-picker" value="#ffffff"
+                                onchange="onStrokeColorChange(this.value)" />
+                        </div>
+                        <div class="fill-clr">
+                            <div class="button-replica"><label for="fillClr">🎨</label></div>
+                            <input id="fillClr" type="color" class="fill-color-picker" value="#ffffff"
+                                onchange="onFillColorChange(this.value)" />
+                        </div>
+                    </div>
+                    <button class="arrow-up" value="-5" onclick="onPosChange(this)">↑</button>
+                    <button class="arrow-down" value="+5" onclick="onPosChange(this)">↓</button>
+                    <button class="save-btn" onclick="onSaveMeme(this)">Save</button>
+                    <button class="download-btn"><a href="#" class="btn" onclick="downloadImg(this)"
+                            download="my-meme.jpg">Download</a></button>
+                    <button class="add-line-btn" onclick="onAddLine()">Add Line</button>
+                    <button class="toggle-line-btn" onclick="onToggleLine()">Toggle</button>
+                    <button class="share-btn" onclick="shareToFacebook()">Share</button>
+                </div>
             </div>
         </div>
 
@@ -63,13 +126,15 @@
         <div class="my-memes"></div>
     </main>
 
+
+    <footer>Developed by Roni Yerushalmi 2023</footer>
     <script src="js/util.service.js"></script>
     <script src="js/editor.service.js"></script>
     <script src="js/imgs.service.js"></script>
     <script src="js/gallery.controller.js"></script>
-    <script src="js/my-memes.service.js"></script>
-    <script src="js/my-memes.controller.js"></script>
-    <script src="js/editor.controller.js"></script>
+    <script src="js/saved-memes.service.js"></script>
+    <script src="js/saved-memes.controller.js"></script>
+    <script src="js/main.controller.js"></script>
 </body>
 
 </html>

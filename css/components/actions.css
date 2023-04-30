@@ -1,9 +1,13 @@
 .search-box {
-    border: 1px solid gray;
-    border-radius: .7em;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 2em;
     width: 90%;
     margin-block-start: 2em;
     margin-block-end: 2em;
     display: inline-block;
     padding: .4rem;
+}
+
+.search-box::placeholder {
+    padding-inline: .5em;
 }

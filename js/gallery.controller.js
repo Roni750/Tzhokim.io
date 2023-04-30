@@ -1,11 +1,13 @@
 'use strict'
 
 function onInit() {
+    displayBtnMobileDevice()
     addActiveClass('templates-title')
     renderGallery()
     getMemes()
     setMemeSize()
     injectKeyWords()
+    setLinesPosByImgId(gCurrImgId)
 }
 
 function renderGallery() {

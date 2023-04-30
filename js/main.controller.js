@@ -116,7 +116,54 @@ function onAddLine() {
 
 // * Routing pages functions/ DOM manipulation
 
+function displayBtnMobileDevice() {
+    const header = document.querySelector('header')
+    const btn = header.querySelector('.nav-btn')
+    addEventListener("resize", (event) => {
+        if (window.innerWidth <= 480) {
+            document.querySelector('.nav-bar').classList.add('hide')
+            btn.classList.remove('hide')
+        } else if (window.innerWidth > 480) {
+            header.querySelector('.nav-bar').classList.remove('hide')
+            btn.classList.add('hide')
+        }
+    })
+
+    if (window.innerWidth > 480) {
+        header.querySelector('.nav-btn').classList.add('hide')
+    } else if (window.innerWidth < 480) {
+        header.querySelector('.nav-bar').classList.add('hide')
+        header.querySelector('.nav-btn').classList.remove('hide')
+    }
+}
+
+function onToggleMenu(elBtn, off) {
+    if (off === 'off') closeNavbar()
+    else {
+        const header = document.querySelector('header')
+        const btn = header.querySelector('.nav-btn')
+        if (elBtn.innerText == '☰') {
+            header.querySelector('.nav-bar').classList.remove('hide')
+            header.querySelector('.nav-bar').classList.add('nav-bar-mobile')
+            btn.innerText = 'X'
+            btn.style.color = 'white'
+        } else if (elBtn.innerText == 'X') {
+            closeNavbar()
+        }
+    }
+}
+
+function closeNavbar() {
+    const header = document.querySelector('header')
+    const btn = header.querySelector('.nav-btn')
+    header.querySelector('.nav-bar').classList.add('hide')
+    btn.innerText = '☰'
+    btn.style.color = '#a9a9a9'
+}
+
 function showGallery() {
+    if (isMobile()) onToggleMenu(undefined , 'off')
+    document.querySelector('.actions').classList.remove('hide')
     if (gCurrImgId) returnImgValues()
     hide('control-box-area')
     hide('canvas-container')
@@ -125,7 +172,6 @@ function showGallery() {
     removeActiveClass('templates-title')
     removeActiveClass('about-title')
     document.querySelector('.search-box').value = ''
-    document.querySelector('.hide').classList.remove('hide')
     document.querySelector('.templates-title').classList.add('active')
     document.querySelector('.my-memes-title').classList.remove('active')
     const elGallery = document.querySelector('.gallery-container')
@@ -133,6 +179,25 @@ function showGallery() {
 
     resetMeme()
     renderGallery()
+}
+
+function injectDesktopNavbar() {
+    const header = document.querySelector('header')
+    header.querySelector('.nav-bar-mobile').classList.add('.nav-bar')
+    header.querySelector('.nav-bar').classList.remove('.nav-bar-mobile')
+}
+
+function showAbout() {
+    if (isMobile()) onToggleMenu(undefined , 'off')
+    const elAbout = document.querySelector('.about')
+    elAbout.classList.remove('hide')
+    hide('actions')
+    hide('gallery-container')
+    hide('playground-area')
+    hide('my-memes')
+    addActiveClass('about-title')
+    removeActiveClass('templates-title')
+    removeActiveClass('my-memes-title')
 }
 
 function addActiveClass(className) {
@@ -150,17 +215,9 @@ function hide(className) {
     el.classList.add('hide')
 }
 
-function showAbout() {
-    const elAbout = document.querySelector('.about')
-    elAbout.classList.remove('hide')
-
-    hide('actions')
-    hide('gallery-container')
-    hide('playground-area')
-    hide('my-memes')
-    addActiveClass('about-title')
-    removeActiveClass('templates-title')
-    removeActiveClass('my-memes-title')
+function isMobile() {
+    const res = (window.innerWidth > 480) ? false : true
+    return res
 }
 
 function onToggleLine() {
@@ -177,63 +234,10 @@ function onTextAlign(alignValue) {
 function showControlBox() {
     const elBoxArea = document.querySelector('.control-box-area')
     elBoxArea.classList.remove('hide')
-    const strHtml = `
-    <div class="control-box-wrapper grid">
-        <select class="font-selection" name="font" id="font-selection" onchange="onFontChange(this.value)">
-            <option value="impact">Impact</option>                
-            <option value="arial">Arial</option>                
-            <option value="tahoma">Tahoma</option>                
-        </select>
-        <textarea class="punchline" oninput="onUpdateText(this)" rows="2" cols="50"></textarea>
-        <!-- <input type="text" placeholder="Punchline goes here" class="punchline" oninput="onUpdateText(this)"> -->
-        <div class="font-scale grid">
-            <button class="a-upscale" onclick="onFontSizeChange(this)">A+</button>
-            <button class="a-downscale" onclick="onFontSizeChange(this)">A-</button>
-        </div>
-        <div class="align-btns grid">
-            <button class="btn-svg" title="right" onclick="onTextAlign(this)">
-                <svg width="1rem" height="1rem" focusable="false">
-                    <path
-                        d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2zm0-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z"
-                        fill-rule="evenodd">
-                    </path>
-                </svg>
-            </button>
-            <button class="btn-svg" title="center" onclick="onTextAlign(this)">
-                <svg width="1rem" height="1rem" focusable="false">
-                    <path
-                        d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z"
-                        fill-rule="evenodd">
-                    </path>
-                </svg>
-            </button>
-            <button class="btn-svg" title="left" onclick="onTextAlign(this)">
-                <svg width="1rem" height="1rem" focusable="false">
-                    <path
-                        d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm3 4h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 110-2zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 010-2zm-3-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z"
-                        fill-rule="evenodd">
-                    </path>
-                </svg>
-            </button>
-        </div>
-        <div class="color-selection grid">
-            <div class="stroke-clr"><div class="button-replica"><label for="strokeClr">🖌️</label></div>
-                <input type="color" id="strokeClr" class="stroke-color-picker" value="#ffffff" onchange="onStrokeColorChange(this.value)"/>
-            </div>
-            <div class="fill-clr"><div class="button-replica"><label for="fillClr">🎨</label></div>
-                <input id="fillClr" type="color" class="fill-color-picker" value="#ffffff" onchange="onFillColorChange(this.value)"/>
-            </div>
-        </div>
-        <button class="arrow-up" value="-5" onclick="onPosChange(this)">↑</button>
-        <button class="arrow-down" value="+5" onclick="onPosChange(this)">↓</button>
-        <button onclick="onSaveMeme(this)">Save</button>
-        <button class="download-btn"><a href="#" class="btn" onclick="downloadImg(this)" download="my-meme.jpg">Download</a></button>
-        <button class="add-line-btn" onclick="onAddLine()">Add Line</button>
-        <button class="toggle-line-btn" onclick="onToggleLine()">Toggle</button>
-        <button class="share-btn" onclick="shareToFacebook()">Share</button>
-    </div>`
-    elBoxArea.innerHTML = strHtml
     hide('gallery-container')
+    if (gCurrImgId) {
+        document.querySelector('.punchline').value = ''
+    }
 }
 
 function shareToFacebook() {

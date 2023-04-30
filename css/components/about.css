@@ -8,9 +8,14 @@
     border-radius: 10px;
 }
 
+.about p {
+    padding-inline: 1em;
+}
+
 .about > img {
     border-radius: 10px;
     border-radius: 10px 10px 0 0;
+    cursor: default;
 }
 
 .about:hover {
