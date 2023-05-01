@@ -13,7 +13,7 @@ function onInit() {
 function renderGallery() {
     let strHtml = ``
     gImgs.map(img => {
-        strHtml += `<img src="img/various/${img.id}.jpg" onclick="onSelectTemplate(${img.id})" class="img img${img.id}">`
+        strHtml += `<img src="img/various/${img.id}.jpg" title="Click to edit" onclick="onSelectTemplate(${img.id})" class="img img${img.id}">`
     })
     let elGallery = document.querySelector('.gallery-container')
     elGallery.innerHTML = strHtml

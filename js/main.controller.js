@@ -9,8 +9,8 @@ function onSelectTemplate(imgId) {
     document.querySelector('.canvas-container').classList.remove('hide')
     document.querySelector('.control-box-area').classList.remove('hide')
     gCurrImgId = imgId
-    returnImgValues()
     setSelectedImgId(imgId)
+    returnImgValues()
     showControlBox()
     initCanvas()
     renderImg(imgId)

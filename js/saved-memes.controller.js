@@ -22,11 +22,12 @@ function showMemes() {
 
 function renderMeme() {
     let strHtml = ''
-    gSavedMemes.map(meme => {
-        const memeContent = encodeURIComponent(JSON.stringify(meme.memeContent))
-        strHtml += `<div class="meme-container flex column"><a href="#" class="jump-to-top"><img class="meme-num-${meme.id}" src="${meme.data}" data-img="${meme.memeContent.selectedImgId}" onclick="renderMemeFromMyMemes('${memeContent}')"/></a>
-        <button class="remove-btn" onclick="onRemoveFromMyMemes(${meme.id})">Remove</button></div>`
-    })
+    console.log("gSavedMemes", gSavedMemes)
+        gSavedMemes.map(meme => {
+            const memeContent = encodeURIComponent(JSON.stringify(meme.memeContent))
+            strHtml += `<div class="meme-container flex column"><a href="#" class="jump-to-top"><img title="Click to edit" class="meme-num-${meme.id}" src="${meme.data}" data-img="${meme.memeContent.selectedImgId}" onclick="renderMemeFromMyMemes('${memeContent}')"/></a>
+            <button class="remove-btn" onclick="onRemoveFromMyMemes(${meme.id})">Remove</button></div>`
+        })
     document.querySelector('.my-memes').innerHTML = strHtml
 }
 
